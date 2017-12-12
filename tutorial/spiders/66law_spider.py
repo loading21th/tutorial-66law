@@ -11,7 +11,7 @@ class x66lawSpider(scrapy.Spider):
             ]
     
     def parse(self,response):
-        for i in range(1,10):
+        for i in range(1,150):
             base_ual_pri = "http://www.66law.cn/question/list_"
             base_ual_last = "_r1.aspx"
             base_url = base_ual_pri + str(i) + base_ual_last
@@ -30,9 +30,10 @@ class x66lawSpider(scrapy.Spider):
         
     def grap_message(self,response):
         item = TutorialItem()
-        useful_item = response.xpath('//div[@class="cont-list"]/div')
-        item['question'] = useful_item[1].xpath('//span/text()').extract()
-        item['detail'] = useful_item[2].xpath('//p/text()').extract()
-        item['answer1'] = useful_item[3].xpath('//div[@class="answer-box"]/p/text()').extract()
-        print item['question']
+        useful_items = response.xpath('//div[@class="cont-list"]/div')
+        item['question'] = useful_items[0].xpath('./span/text()').extract()
+        item['detail'] = useful_items[1].xpath('./p/text()').extract()
+        item['answer']=[]
+        for index in range(2,len(useful_items)):
+            item['answer'].append(useful_items[index].xpath('./div[@class="answer-box"]/p[1]/text()').extract())
         return item

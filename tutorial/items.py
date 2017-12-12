@@ -12,9 +12,5 @@ class TutorialItem(scrapy.Item):
     # define the fields for your item here like:
     question = scrapy.Field()
     detail = scrapy.Field()
-    answer1 = scrapy.Field()
-    answer2 = scrapy.Field()
-    answer3 = scrapy.Field()
-    answer4 = scrapy.Field()
-    answer5 = scrapy.Field()
+    answer = scrapy.Field()
 
