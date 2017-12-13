@@ -32,7 +32,6 @@ class x66lawSpider(scrapy.Spider):
         item = TutorialItem()
         useful_items = response.xpath('//div[@class="cont-list"]/div')
         item['question'] = useful_items[0].xpath('./span/text()').extract()
-        item['detail'] = useful_items[1].xpath('./p/text()').extract()
         item['answer']=[]
         for index in range(2,len(useful_items)):
             item['answer'].append(useful_items[index].xpath('./div[@class="answer-box"]/p[1]/text()').extract())
